@@ -19,7 +19,7 @@ class GeminiService:
 
     def generate_daily_report(self, activities: List[RepoActivity], pm_name: str = "Eduardo Gois") -> str:
         if not activities:
-            return "@everyone 📌 **Relatório Diário Github Mangue House**\n\nNenhuma alteração foi registrada nos repositórios da Mangue House nas últimas 24 horas."
+            return "@everyone **Relatório Diário Github Mangue House**\n\nNenhuma alteração foi registrada nos repositórios da Mangue House nas últimas 24 horas."
 
         formatted_logs = []
         for act in activities:
@@ -55,11 +55,12 @@ Siga rigorosamente as diretrizes e regras das 4 skills completas abaixo:
 REGRAS FINAIS DE SAÍDA PARA O DISCORD:
 - Escreva a resposta em Português do Brasil.
 - Comece obrigatoriamente a primeira linha com a menção e o título em negrito exatamente assim:
-@everyone 📌 **Relatório Diário Github Mangue House**
+@everyone **Relatório Diário Github Mangue House**
 - Para cada repositório com atividade, crie um cabeçalho `### [Nome do Repositório]`
-- Organize em: 🚀 **Novas Funcionalidades**, ⚡ **Melhorias**, 🐛 **Correções de Bugs**, ⚠️ **Atenção & Riscos (Pre-Mortem)**
+- Organize em: **Novas Funcionalidades**, **Melhorias**, **Correções de Bugs**, **Atenção & Riscos (Pre-Mortem)**
+- NUNCA inclua emojis no título, nos cabeçalhos, nas seções ou em qualquer parte do relatório (conforme a skill Humanizer).
 - NUNCA inclua saudações iniciais ("Olá", "Aqui está o relatório") nem despedidas robóticas ("Espero que ajude", "Se tiver dúvidas").
-- Aplique o Pre-Mortem em ⚠️ **Atenção & Riscos**: sinalize *Tigers* (riscos reais no código/PR) e *Elephants* (commits vagos ou suposições sem contexto no Git).
+- Aplique o Pre-Mortem em **Atenção & Riscos**: sinalize *Tigers* (riscos reais no código/PR) e *Elephants* (commits vagos ou suposições sem contexto no Git).
 """
 
         user_prompt = f"""

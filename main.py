@@ -18,7 +18,7 @@ def run_report_workflow():
 
     if not activities:
         print("ℹ️ Nenhuma atividade nas últimas 24h. Enviando mensagem padrão...")
-        discord_svc.send_message("📌 **Resumo Diário GitHub**: Nenhuma alteração foi registrada nos repositórios da Mangue House nas últimas 24 horas.")
+        discord_svc.send_message("@everyone **Relatório Diário Github Mangue House**\n\nNenhuma alteração foi registrada nos repositórios da Mangue House nas últimas 24 horas.")
         print("✅ Notificação enviada.")
         return
 
