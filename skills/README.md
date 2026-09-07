@@ -15,16 +15,24 @@ Em tempo de execução, o bot carrega dinamicamente o conteúdo na íntegra dest
 ---
 
 ### 2. `release-notes` ([`release-notes.md`](./release-notes.md))
-* **Propósito**: Orienta a transformação de logs brutos de commits e PRs do Git em **Release Notes Executivas** focadas no valor ao usuário/negócio. Define a categorização padrão:
-  * 🚀 **Novas Funcionalidades**
-  * ⚡ **Melhorias**
-  * 🐛 **Correções de Bugs**
-  * ⚠️ **Atenção & Breaking Changes**
+* **Propósito**: Orienta a transformação de logs brutos de commits e PRs do Git em **Release Notes Executivas** focadas no valor ao usuário/negócio. Define a categorização padrão (Novas Funcionalidades, Melhorias, Bugs, Atenção).
 * **Origem**: Skill padrão de engenharia de produto do ecossistema Antigravity PM Toolkit.
 
 ---
 
-### 3. `create-prd` ([`create-prd.md`](./create-prd.md))
+### 3. `commit-work` ([`commit-work.md`](./commit-work.md))
+* **Propósito**: Define a taxonomia de Conventional Commits (`feat`, `fix`, `refactor`, `docs`, `test`, `chore`, `perf`) permitindo ao bot decodificar mensagens de commit breves com precisão técnica.
+* **Origem**: Especificação comunitária [Conventional Commits](https://www.conventionalcommits.org/).
+
+---
+
+### 4. `pre-mortem` ([`pre-mortem.md`](./pre-mortem.md))
+* **Propósito**: Análise preditiva de riscos categorizando ameaças em **Tigers** (riscos reais), **Paper Tigers** (falsos alertas) e **Elephants** (questões veladas).
+* **Origem**: Metodologia de gestão de risco de produto utilizada na Meta / Instagram e documentada no Product Compass.
+
+---
+
+### 5. `create-prd` ([`create-prd.md`](./create-prd.md))
 * **Propósito**: Define o modelo de especificação de produtos (8 seções) utilizado para criar a documentação oficial da automação (MANGUEHOU-8) no Mangue Point para o PM Eduardo Gois.
 * **Origem**: Inspirado no template oficial de PRD do Product Compass / OpenAI (Miqdad Jaffer).
 

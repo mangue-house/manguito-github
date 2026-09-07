@@ -7,6 +7,12 @@ description: "Generate user-facing release notes from tickets, PRDs, or changelo
 
 Transform technical tickets, PRDs, or internal changelogs into polished, user-facing release notes.
 
+### Context
+
+You are writing release notes for **$ARGUMENTS**.
+
+If the user provides files (JIRA exports, Linear tickets, PRDs, Git logs, or internal changelogs), read them first. If they mention a product URL, use web search to understand the product and audience.
+
 ### Instructions
 
 1. **Gather raw material**: Read all provided tickets, changelogs, or descriptions. Extract:
@@ -18,23 +24,25 @@ Transform technical tickets, PRDs, or internal changelogs into polished, user-fa
    - **New Features**: Entirely new capabilities
    - **Improvements**: Enhancements to existing features
    - **Bug Fixes**: Issues resolved
-   - **Breaking Changes / Attention**: Anything that requires user action (migrations, API changes, uncontextual commits)
+   - **Breaking Changes**: Anything that requires user action (migrations, API changes)
+   - **Deprecations**: Features being sunset
 
 3. **Write each entry** following these principles:
    - Lead with the user benefit, not the technical change
    - Use plain language — avoid jargon, internal codenames, or ticket numbers
    - Keep each entry to 1-3 sentences
+   - Include visuals or screenshots if the user provides them
 
    **Example transformations**:
    - Technical: "Implemented Redis caching layer for dashboard API endpoints"
-   - User-facing: "Dashboards now load up to 3x faster, so you spend less time waiting and more time analyzing."
+   - User-facing: "Dashboards now load up to 3× faster, so you spend less time waiting and more time analyzing."
 
    - Technical: "Fixed race condition in concurrent checkout flow"
    - User-facing: "Fixed an issue where some orders could fail during high-traffic periods."
 
 4. **Structure the release notes**:
 
-   ```markdown
+   ```
    # [Product Name] — [Version / Date]
 
    ## New Features
@@ -46,8 +54,10 @@ Transform technical tickets, PRDs, or internal changelogs into polished, user-fa
    ## Bug Fixes
    - Fixed [issue description in user terms]
 
-   ## Breaking Changes / Attention (if any)
-   - **Action required**: [What users need to do or review]
+   ## Breaking Changes (if any)
+   - **Action required**: [What users need to do]
    ```
 
 5. **Adjust tone** to match the product's voice — professional for B2B, friendly for consumer, developer-focused for APIs.
+
+Save as a markdown document. If the user wants HTML or another format, convert accordingly.

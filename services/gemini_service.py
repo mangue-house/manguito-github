@@ -29,28 +29,36 @@ class GeminiService:
 
         activity_text = "\n\n---\n\n".join(formatted_logs)
 
-        # Carrega o conteúdo na íntegra das skills
+        # Carrega o conteúdo na íntegra das 4 skills do bot
         humanizer_skill = load_skill("humanizer.md")
         release_notes_skill = load_skill("release-notes.md")
+        commit_work_skill = load_skill("commit-work.md")
+        pre_mortem_skill = load_skill("pre-mortem.md")
 
         system_instruction = f"""
 Você é o assistente de gestão de produto de {pm_name} na Mangue House. Seu objetivo é analisar as alterações do GitHub (commits e PRs) e gerar um relatório diário no formato de Release Notes Executivo de Produto.
 
-Siga rigorosamente as diretrizes e regras das duas skills completas abaixo:
+Siga rigorosamente as diretrizes e regras das 4 skills completas abaixo:
 
-=== SKILL 1: HUMANIZER (Diretrizes de Linguagem Humana e Remoção de Clichês de IA) ===
+=== SKILL 1: HUMANIZER (Linguagem Humana e Remoção de Clichês) ===
 {humanizer_skill}
 
-=== SKILL 2: RELEASE NOTES (Diretrizes de Categorização e Tradução para Benefício de Produto) ===
+=== SKILL 2: RELEASE NOTES (Categorização e Tradução para Benefício do Usuário) ===
 {release_notes_skill}
+
+=== SKILL 3: COMMIT WORK (Taxonomia Conventional Commits) ===
+{commit_work_skill}
+
+=== SKILL 4: PRE-MORTEM (Análise Preditiva de Riscos e Elephants) ===
+{pre_mortem_skill}
 
 REGRAS FINAIS DE SAÍDA PARA O DISCORD:
 - Escreva a resposta em Português do Brasil.
 - Comece diretamente com: 📌 Resumo de Atividades & Release Notes - Mangue House
 - Para cada repositório com atividade, crie um cabeçalho `### [Nome do Repositório]`
-- Organize em: 🚀 **Novas Funcionalidades**, ⚡ **Melhorias**, 🐛 **Correções de Bugs**, ⚠️ **Atenção & Ações Pendentes**
+- Organize em: 🚀 **Novas Funcionalidades**, ⚡ **Melhorias**, 🐛 **Correções de Bugs**, ⚠️ **Atenção & Riscos (Pre-Mortem)**
 - NUNCA inclua saudações iniciais ("Olá", "Aqui está o relatório") nem despedidas robóticas ("Espero que ajude", "Se tiver dúvidas").
-- Se houver commits vagos (ex: "fix", "wip", "update"), coloque-os em ⚠️ **Atenção** explicitando que a mensagem carecia de contexto.
+- Aplique o Pre-Mortem em ⚠️ **Atenção & Riscos**: sinalize *Tigers* (riscos reais no código/PR) e *Elephants* (commits vagos ou suposições sem contexto no Git).
 """
 
         user_prompt = f"""
@@ -58,7 +66,7 @@ Aqui estão os logs brutos das alterações ocorridas nas últimas 24 horas nos 
 
 {activity_text}
 
-Gere o relatório formatado para o Discord aplicando na íntegra as skills de Humanizer e Release Notes fornecidas acima.
+Gere o relatório formatado para o Discord aplicando na íntegra as 4 skills fornecidas acima.
 """
 
         try:
