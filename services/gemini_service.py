@@ -1,7 +1,17 @@
+import os
 from typing import List
 from google import genai
 from google.genai import types
 from services.github_service import RepoActivity
+
+def load_skill(filename: str) -> str:
+    """Carrega dinamicamente o conteúdo na íntegra de uma skill do diretório /skills"""
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    skill_path = os.path.join(base_dir, "skills", filename)
+    if os.path.exists(skill_path):
+        with open(skill_path, "r", encoding="utf-8") as f:
+            return f.read()
+    return ""
 
 class GeminiService:
     def __init__(self, api_key: str):
@@ -19,49 +29,36 @@ class GeminiService:
 
         activity_text = "\n\n---\n\n".join(formatted_logs)
 
+        # Carrega o conteúdo na íntegra das skills
+        humanizer_skill = load_skill("humanizer.md")
+        release_notes_skill = load_skill("release-notes.md")
+
         system_instruction = f"""
 Você é o assistente de gestão de produto de {pm_name} na Mangue House. Seu objetivo é analisar as alterações do GitHub (commits e PRs) e gerar um relatório diário no formato de Release Notes Executivo de Produto.
 
-DIRETRIZES DE CATEGORIZAÇÃO (Skill Release Notes):
-1. Transforme termos técnicos em Benefício ao Usuário/Negócio:
-   - Exemplo Técnico: "Implemented Redis caching layer" -> "Painel de controle com carregamento 3x mais rápido".
-2. Categorize as entregas de cada repositório em:
-   - 🚀 **Novas Funcionalidades**: Recursos totalmente inéditos adicionados.
-   - ⚡ **Melhorias**: Aprimoramentos de desempenho, UI, estabilidade ou refatorações de código.
-   - 🐛 **Correções de Bugs**: Erros ou falhas resolvidos.
-   - ⚠️ **Atenção & Breaking Changes**: PRs pendentes de revisão, mudanças críticas de API ou commits sem contexto.
+Siga rigorosamente as diretrizes e regras das duas skills completas abaixo:
 
-DIRETRIZES DE LINGUAGEM HUMANIZADA (Humanizer Rules):
-- Escreva em tom humano, direto e profissional.
-- NUNCA use palavras de IA infladas ("revolucionário", "testemunho de", "paisagem evolutiva", "além disso", "focal point", "crucial", "empolgante", "tapeçaria").
-- NUNCA inclua introduções ou fechamentos robóticos (ex: "Aqui estão as release notes", "Espero que ajude").
-- Se um commit for vago (ex: "fix", "wip"), explicite abertamente em ⚠️ Atenção que a mensagem carecia de contexto.
+=== SKILL 1: HUMANIZER (Diretrizes de Linguagem Humana e Remoção de Clichês de IA) ===
+{humanizer_skill}
 
-ESTRUTURA DO TEXTO:
-📌 Resumo de Atividades & Release Notes - Mangue House
+=== SKILL 2: RELEASE NOTES (Diretrizes de Categorização e Tradução para Benefício de Produto) ===
+{release_notes_skill}
 
-(Para cada repositório com atividade no dia:)
-### [Nome do Repositório]
-
-🚀 **Novas Funcionalidades** (se houver)
-• ...
-
-⚡ **Melhorias** (se houver)
-• ...
-
-🐛 **Correções de Bugs** (se houver)
-• ...
-
-⚠️ **Atenção & Ações Pendentes** (se houver)
-• ...
+REGRAS FINAIS DE SAÍDA PARA O DISCORD:
+- Escreva a resposta em Português do Brasil.
+- Comece diretamente com: 📌 Resumo de Atividades & Release Notes - Mangue House
+- Para cada repositório com atividade, crie um cabeçalho `### [Nome do Repositório]`
+- Organize em: 🚀 **Novas Funcionalidades**, ⚡ **Melhorias**, 🐛 **Correções de Bugs**, ⚠️ **Atenção & Ações Pendentes**
+- NUNCA inclua saudações iniciais ("Olá", "Aqui está o relatório") nem despedidas robóticas ("Espero que ajude", "Se tiver dúvidas").
+- Se houver commits vagos (ex: "fix", "wip", "update"), coloque-os em ⚠️ **Atenção** explicitando que a mensagem carecia de contexto.
 """
 
         user_prompt = f"""
-Aqui estão os logs brutos das alterações ocorridas nas últimas 24 horas:
+Aqui estão os logs brutos das alterações ocorridas nas últimas 24 horas nos repositórios:
 
 {activity_text}
 
-Gere o relatório formatado para o Discord seguindo rigorosamente a estrutura de Release Notes acima.
+Gere o relatório formatado para o Discord aplicando na íntegra as skills de Humanizer e Release Notes fornecidas acima.
 """
 
         try:
