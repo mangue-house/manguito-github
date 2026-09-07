@@ -1,0 +1,35 @@
+name: Daily GitHub Activity Report (Python)
+
+on:
+  schedule:
+    # 22:00 BRT (UTC-3) -> 01:00 UTC
+    - cron: '0 1 * * *'
+  workflow_dispatch: # Permite disparo manual no GitHub Actions
+
+jobs:
+  report:
+    name: Generate & Send Daily Report
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Execute Daily Report
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT_TOKEN || secrets.GITHUB_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          GITHUB_ORG: ${{ vars.GITHUB_ORG || 'MangueHouse' }}
+        run: python main.py
