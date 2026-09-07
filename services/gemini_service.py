@@ -19,7 +19,7 @@ class GeminiService:
 
     def generate_daily_report(self, activities: List[RepoActivity], pm_name: str = "Eduardo Gois") -> str:
         if not activities:
-            return "📌 **Resumo Diário GitHub**: Nenhuma alteração foi registrada nos repositórios da Mangue House nas últimas 24 horas."
+            return "@everyone 📌 **Relatório Diário Github Mangue House**\n\nNenhuma alteração foi registrada nos repositórios da Mangue House nas últimas 24 horas."
 
         formatted_logs = []
         for act in activities:
@@ -54,7 +54,8 @@ Siga rigorosamente as diretrizes e regras das 4 skills completas abaixo:
 
 REGRAS FINAIS DE SAÍDA PARA O DISCORD:
 - Escreva a resposta em Português do Brasil.
-- Comece diretamente com: 📌 Resumo de Atividades & Release Notes - Mangue House
+- Comece obrigatoriamente a primeira linha com a menção e o título em negrito exatamente assim:
+@everyone 📌 **Relatório Diário Github Mangue House**
 - Para cada repositório com atividade, crie um cabeçalho `### [Nome do Repositório]`
 - Organize em: 🚀 **Novas Funcionalidades**, ⚡ **Melhorias**, 🐛 **Correções de Bugs**, ⚠️ **Atenção & Riscos (Pre-Mortem)**
 - NUNCA inclua saudações iniciais ("Olá", "Aqui está o relatório") nem despedidas robóticas ("Espero que ajude", "Se tiver dúvidas").
