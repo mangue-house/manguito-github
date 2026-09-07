@@ -31,5 +31,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_PAT_TOKEN || secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          GITHUB_ORG: ${{ vars.GITHUB_ORG || 'MangueHouse' }}
+          GITHUB_ORG: ${{ vars.GITHUB_ORG || 'mangue-house' }}
         run: python main.py

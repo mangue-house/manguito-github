@@ -6,7 +6,7 @@ load_dotenv()
 
 class Config(BaseModel):
     github_token: str = Field(default_factory=lambda: os.getenv("GITHUB_TOKEN", ""))
-    github_org: str = Field(default_factory=lambda: os.getenv("GITHUB_ORG", "MangueHouse"))
+    github_org: str = Field(default_factory=lambda: os.getenv("GITHUB_ORG", "mangue-house"))
     gemini_api_key: str = Field(default_factory=lambda: os.getenv("GEMINI_API_KEY", ""))
     discord_webhook_url: str = Field(default_factory=lambda: os.getenv("DISCORD_WEBHOOK_URL", ""))
 
