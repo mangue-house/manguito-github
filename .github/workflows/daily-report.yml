@@ -2,8 +2,8 @@ name: Daily GitHub Activity Report (Python)
 
 on:
   schedule:
-    # 22:00 BRT (UTC-3) -> 01:00 UTC
-    - cron: '0 1 * * *'
+    # 00:23 BRT (UTC-3) -> 03:23 UTC (minuto quebrado para evitar pico de fila no Actions)
+    - cron: '23 3 * * *'
   workflow_dispatch: # Permite disparo manual no GitHub Actions
 
 jobs:

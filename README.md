@@ -1,6 +1,6 @@
 # Discordito: Automação de Relatórios Diários do GitHub (Python)
 
-Automação em Python desenvolvida para a **Mangue House** que coleta diariamente as alterações em todos os repositórios da organização no GitHub, sintetiza as entregas através da API do Gemini (`gemini-2.5-flash` + skill `humanizer`) e envia um resumo executivo de produto às 22:00 BRT no Discord para o PM Eduardo Gois.
+Automação em Python desenvolvida para a **Mangue House** que coleta diariamente as alterações em todos os repositórios da organização no GitHub, sintetiza as entregas através da API do Gemini (`gemini-2.5-flash` + skill `humanizer`) e envia um resumo executivo de produto às 00:23 BRT no Discord para o PM Eduardo Gois.
 
 ---
 
@@ -10,7 +10,7 @@ Automação em Python desenvolvida para a **Mangue House** que coleta diariament
 - **IA**: Google Gemini API (`google-genai` SDK)
 - **Integração Git**: GitHub REST API (`requests`)
 - **Notificação**: Discord Webhooks
-- **Execução / Agendamento**: GitHub Actions (`.github/workflows/daily-report.yml`) às 22h BRT
+- **Execução / Agendamento**: GitHub Actions (`.github/workflows/daily-report.yml`) às 00:23 BRT
 
 ---
 
